@@ -1,11 +1,5 @@
 #!/bin/bash
 
-# apt update
-# apt install zsh
-# chsh -s $(which zsh)
-# sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh) -y"
-
-
 # Install rust
 curl https://sh.rustup.rs -sSf > install_rust.sh
 sh install_rust.sh -y
@@ -25,6 +19,3 @@ git checkout v0.20.1
 # clone demo
 mkdir -p /workspace/Source/GitHub/simonerom/depin-zk-test
 git clone https://github.com/simonerom/depin-zk-test.git /workspace/Source/GitHub/simonerom/depin-zk-test
-
-#install kernel headers
-# apt install linux-headers-$(uname -r)
