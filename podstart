@@ -1,0 +1,37 @@
+#!/bin/bash
+
+apt update
+apt install zsh
+chsh -s $(which zsh)
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh) -y"
+
+
+# Install rust
+curl https://sh.rustup.rs -sSf > install_rust.sh
+sh install_rust.sh -y
+source "$HOME/.cargo/env"
+
+#install risc0
+cargo install cargo-binstall
+cargo binstall cargo-risczero
+cargo risczero install 
+
+# clone risc0
+mkdir -p /workspace/Source/GitHub/risc0
+git clone https://github.com/risc0/risc0.git /workspace/Source/GitHub/risc0
+cd /workspace/Source/GitHub/risc0
+git checkout v0.20.1
+
+# clone demo
+mkdir -p /workspace/Source/GitHub/simonerom/depin-zk-test
+git clone https://github.com/simonerom/depin-zk-test.git /workspace/Source/GitHub/simonerom/depin-zk-test
+
+# install cuda toolkit
+cd /workspace
+wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64/cuda-ubuntu2204.pin
+mv cuda-ubuntu2204.pin /etc/apt/preferences.d/cuda-repository-pin-600
+wget https://developer.download.nvidia.com/compute/cuda/12.3.2/local_installers/cuda-repo-ubuntu2204-12-3-local_12.3.2-545.23.08-1_amd64.deb
+dpkg -i cuda-repo-ubuntu2204-12-3-local_12.3.2-545.23.08-1_amd64.deb
+cp /var/cuda-repo-ubuntu2204-12-3-local/cuda-*-keyring.gpg /usr/share/keyrings/
+apt-get update
+apt-get -y install cuda-toolkit-12-3
