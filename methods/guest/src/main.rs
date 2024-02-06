@@ -22,7 +22,7 @@ use risc0_zkvm::{
     guest::env
 };
 
-use sha2::{Digest as _, Sha256};
+// use sha2::{Digest as _, Sha256};
 risc0_zkvm::guest::entry!(main);
 
 fn main() {
@@ -31,14 +31,14 @@ fn main() {
     env::read_slice(&mut batch);
 
     // Iterate over the slice messages and compute the hash of the data filed
-    // Build an array that maps the device id to the first 2 bytes of the hash
+    // Build an array that maps the device ID to the first 2 bytes of the hash
 
     // init the array
     let mut res: [Owned; BATCH_SIZE] = [Default::default(); BATCH_SIZE];
     let mut i = 0;
     for message in batch.iter() {
         // Calculate the location distance from the Coloseum in Rome
-        let distance = (message.latitude as f64 - 41.890251).powi(2) + (message.longitude as f64 - 12.492373).powi(2);
+        let distance = (message.latitude - 41).pow(2) + (message.longitude - 12).pow(2);
         //let distance = distance.sqrt() as u64;
 
         if (distance as  u64) < 5 {
