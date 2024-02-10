@@ -22,7 +22,7 @@ if (distance) < 100 {
 }
 ```
 
-| BATCH SIZE | METAL (REAL)| METAL (INT) | NVIDIA (REAL) | NVIDIA (INT) |
+| BATCH SIZE | M1 PRO (REAL)| M1 PRO (INT) | NVIDIA (REAL) | NVIDIA (INT) |
 |------------|-------------|-------------|---------------|--------------|
 | 100        | 13s         | 9.5s        | 2s            | 1.3s         |
 | 1000       | 70s         | 14s         | 10s           | 2.1s         |
