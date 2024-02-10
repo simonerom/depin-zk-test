@@ -1,77 +1,44 @@
 # Hello World for the RISC Zero zkVM
 
 Welcome!
-
-This `hello-world` example is a minimal application for the RISC Zero [zkVM],
-designed to help you get started building zkVM applications.
+This code is based on the `hello-world` example for the RISC Zero [zkVM]
 
 For a step-by-step guide to building your first zkVM application, we recommend
 [this tutorial][tutorial].
 
-## Quick Start
+The intended use is to benchmark RISC0 performances on some basic logic applied to numerous input messages. It's been tested on runpod.io on an NVIDIA RTX 4090 and H100 PCIe using CUDA acceleration and compared with the same execution on a Macbook Pro M1 16GB. 
 
-First, follow the [examples guide] to install dependencies and check out the correct version of the example.
-
-Then, run the example with:
-
-```bash
-cargo run --release
+# Usage
+On a Macbook Pro, just run 
+```sh
+cargo run -r -F metal
 ```
 
-Congratulations! You just constructed a zero-knowledge proof that you know the
-factors of 391.
+On runpod.io, make sure you start an instance from a template that includes CUDA.
+I've selected the following:
+```text
+RunPod Pytorch 2.2.10
+runpod/pytorch:2.2.0-py3.10-cuda12.1.1-devel-ubuntu22.04
+```
 
-## Use Cases
 
-Writing an application for the RISC Zero [zkVM] is the easiest way for software
-developers to produce zero-knowledge proofs. Whether you're [building for
-blockchains][bonsai-tweet] or not, RISC Zero offers the most flexible and mature
-ecosystem for developing applications that involve ZKPs.
+run the following to install Oh My Zsh shell (this is just my own preference!)
+```sh
+./instshell
+```
+then install all required packages
 
-You can run the zkVM locally and your secrets will never leave your own machine,
-or you can upload your program & inputs to [Bonsai] for remote proving.
+```sh
+./podstart
+```
 
-## Project Organization
+finally, run
+```sh
+cargo run -r -F cuda
+```
 
-zkVM applications are organized into a [host program] and a [guest program]. The
-host program can be found in [`src/main.rs`] and the guest program can be found
-in [`methods/guest/src/main.rs`].
+The first compilation may take >5 minutes, please be patient.
+The first execution may result too long, just run the second one for a more accurate execution time.
 
-The [host] first [executes] the guest program and then [proves the
-execution][prove] to construct a [receipt]. The receipt can be passed to a third
-party, who can examine the [journal] to check the program's outputs and can
-[verify] the [receipt] to ensure the integrity of the [guest program]'s
-execution.
 
-### What gets proven?
 
-The [receipt] proves that the [guest program] was executed correctly, and that
-the contents of `receipt.journal` match what was written by `env::commit()`
-during the execution of the guest program.
-
-By running the demo, Alice demonstrates that she knows two integers that
-multiply to give the number written in `receipt.journal`. Thus, Alice proves
-that the number written in `receipt.journal` is composite — and that she knows
-the factors — without revealing any further information.
-
-## Tutorial: Building your first zkVM Application
-
-For a step-by-step guide to building first zkVM application, we recommend [this
-tutorial][tutorial]. For more materials, check out the [developer docs].
-
-[`methods/guest/src/main.rs`]: ./methods/guest/src/main.rs
-[`src/main.rs`]: ./src/main.rs
-[bonsai-tweet]: https://twitter.com/RiscZero/status/1677316664772132864
-[Bonsai]: https://dev.bonsai.xyz
-[developer docs]: https://dev.risczero.com/zkvm
-[executes]: https://dev.risczero.com/terminology#execute
-[guest program]: https://dev.risczero.com/terminology#guest-program
-[host program]: https://dev.risczero.com/terminology#host-program
-[host]: https://dev.risczero.com/terminology#host
-[examples guide]: https://dev.risczero.com/api/zkvm/examples/#running-the-examples
-[journal]: https://dev.risczero.com/terminology#journal
-[prove]: https://dev.risczero.com/terminology#prove
-[receipt]: https://dev.risczero.com/terminology#receipt
-[tutorial]: https://dev.risczero.com/api/zkvm/tutorials/hello-world
-[verify]: https://dev.risczero.com/terminology#verify
-[zkVM]: https://dev.risczero.com/zkvm
