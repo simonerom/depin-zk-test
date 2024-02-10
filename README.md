@@ -1,4 +1,4 @@
-# Hello World for the RISC Zero zkVM
+#Benchmark RISC Zero zkVM for DePIN
 
 Welcome!
 This code is based on the `hello-world` example for the RISC Zero [zkVM]
