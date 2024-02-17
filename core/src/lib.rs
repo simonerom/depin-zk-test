@@ -1,8 +1,10 @@
 // Define the message type
 
 use bytemuck::{Pod, Zeroable};
-pub const BATCH_SIZE: usize = 100;
+use serde::{Serialize, Deserialize};
+pub const BATCH_SIZE: usize = 10;
 
+#[derive(Serialize, Deserialize)]
 #[derive(Debug, Copy, Clone, Pod, Zeroable)]
 #[repr(C)]
 pub struct Message {
@@ -11,9 +13,10 @@ pub struct Message {
     pub latitude: u32,
     pub longitude: u32,
 }
+#[derive(Serialize, Deserialize)]
 #[derive(Debug, Copy, Clone, Pod, Zeroable)]
 #[repr(C)]
-pub struct Owned {
+pub struct Result {
     pub device_id: u64,
     pub distance: u64
 }
@@ -30,12 +33,13 @@ impl Default for Message {
     }
 }
 
-// Implement Default for the Owned type
-impl Default for Owned {
+// Implement Default for the Result type
+impl Default for Result {
     fn default() -> Self {
-        Owned {
+        Result {
             device_id: 0,
             distance: 0
         }
     }
 }
+

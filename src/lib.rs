@@ -26,10 +26,11 @@ use risc0_zkvm::{default_prover, ExecutorEnv, Receipt};
 // The factors a and b are kept secret.
 
 // Compute the product a*b inside the zkVM
-pub fn multiply(batch: [Message; BATCH_SIZE]) -> (Receipt, u64) {
+pub fn process_batch(batch: [String; BATCH_SIZE]) -> (Receipt, u64) {
     let env = ExecutorEnv::builder()
         // Send a & b to the guest
-        .write_slice(&batch)
+        .write(&batch)
+        .unwrap()
         .build()
         .unwrap();
 

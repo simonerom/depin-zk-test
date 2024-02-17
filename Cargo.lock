@@ -1041,7 +1041,7 @@ dependencies = [
  "provehash-core",
  "rand",
  "risc0-zkvm",
- "serde",
+ "serde_json",
 ]
 
 [[package]]
@@ -1653,6 +1653,7 @@ name = "provehash-core"
 version = "0.1.0"
 dependencies = [
  "bytemuck",
+ "serde",
 ]
 
 [[package]]

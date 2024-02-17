@@ -9,6 +9,8 @@ edition = "2021"
 risc0-zkvm = { path = "../../../../risc0/risc0/zkvm", default-features = false, features = ["std"] }
 provehash-core = { path = "../../core" }
 sha2 = "0.10.6"
+geoutils = "0.5.1"
+serde_json = "1.0.113"
 
 [patch.crates-io]
 # Placing this patch statement in the workspace Cargo.toml will add RISC Zero SHA-256 accelerator
