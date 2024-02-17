@@ -45,18 +45,22 @@ runpod/pytorch:2.2.0-py3.10-cuda12.1.1-devel-ubuntu22.04
 ```
 
 
-run the following to install Oh My Zsh shell (this is just my own preference!)
+run the following to install Oh My Zsh shell (this is just my preference!)
 ```sh
-./instshell
+sh instshell
 ```
 then install all required packages
 
 ```sh
-./podstart
+./podstart # answer "yes" when required a couple times
 ```
 
 finally, run
 ```sh
+cd /workspace/Source/GitHub/simonerom/depin-zk-test
+# Optionally, checkout into the array input example that shows how to deal with the array of strings as input
+# git checkout string_array
+source ~/.cargo/env
 cargo run -r -F cuda
 ```
 
