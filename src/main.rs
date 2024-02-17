@@ -19,7 +19,7 @@ use hello_world::process_batch;
 use hello_world_methods::MULTIPLY_ID;
 
 fn main() {
-    let mut batch: [String; BATCH_SIZE] = Default::default();
+    let mut batch: Vec<String> = Default::default();
     // Fill in the batch with some data
     for i in 0..BATCH_SIZE {
         // Create a new message struct
@@ -32,7 +32,7 @@ fn main() {
         // Serialize the message to a JSON string
         let serstr: String = serde_json::to_string(&message).unwrap();
         println!("Message: {}", serstr);
-        batch[i] = serstr;
+        batch.push(serstr);
     }
 
     let (receipt, _) = process_batch(batch);

@@ -8,10 +8,10 @@ risc0_zkvm::guest::entry!(main);
 fn main() {
     // Load the slice of messages from the host
     // println!("Guest execution started... ");
-    let batch: [String; BATCH_SIZE] = env::read();
+    let batch_str: Vec<String> = env::read();
     // println!("Received {} messages.", batch.len());
     // Parse the JSON messages into a slice of Message structs
-    let batch: Vec<Message> = batch.iter().map(|s| serde_json::from_str(s).unwrap()).collect();
+    let batch: Vec<Message> = batch_str.iter().map(|s| serde_json::from_str(s).unwrap()).collect();
 
     // Init the output array
     let mut res: Vec<Result> = Vec::new();

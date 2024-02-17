@@ -2,7 +2,7 @@
 
 use bytemuck::{Pod, Zeroable};
 use serde::{Serialize, Deserialize};
-pub const BATCH_SIZE: usize = 10;
+pub const BATCH_SIZE: usize = 100;
 
 #[derive(Serialize, Deserialize)]
 #[derive(Debug, Copy, Clone, Pod, Zeroable)]
