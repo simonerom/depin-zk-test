@@ -26,7 +26,7 @@ use risc0_zkvm::{default_prover, ExecutorEnv, Receipt};
 // The factors a and b are kept secret.
 
 // Compute the product a*b inside the zkVM
-pub fn process_batch(batch: Vec<String>) -> (Receipt, u64) {
+pub fn process_batch(batch: Vec<String>) -> (Receipt, Vec<Result>) {
     let env = ExecutorEnv::builder()
         // Send a & b to the guest
         .write(&batch)
@@ -45,15 +45,16 @@ pub fn process_batch(batch: Vec<String>) -> (Receipt, u64) {
     println!("Start proving at {}", date.format("%Y-%m-%d %H:%M:%S"));
     let receipt = prover.prove(env, MULTIPLY_ELF).unwrap();
     println!("Proving time: {:?}", start.elapsed());
-    // Extract journal of receipt (i.e. output c, where c = a * b)
-    let c: u64 = receipt.journal.decode().expect(
-        "Journal output should deserialize into the same types (& order) that it was written",
-    );
+    // Extract journal of receipt
+    let output: Vec<Result> = receipt.journal.decode().unwrap();
 
-    // Report the product
-    println!("BATCH SIZE IS {}", c);
+    // Print, notice, after committing to a journal, the private input became public
+    println!("Hello, world! I generated a proof of guest execution! Below is a public output from journal ");
+    for result in &output {
+        println!("Device ID: {}, Rewards: {}", result.device_id, result.distance);
+    }
 
-    (receipt, c)
+    (receipt, output)
 }
 
 #[cfg(test)]
