@@ -6,13 +6,16 @@ use serde_json;
 risc0_zkvm::guest::entry!(main);
 
 fn main() {
+    let start = env::cycle_count();
+
     // Load the slice of messages from the host
     // println!("Guest execution started... ");
     let batch_str: Vec<String> = env::read();
     // println!("Received {} messages.", batch.len());
     // Parse the JSON messages into a slice of Message structs
     let batch: Vec<Message> = batch_str.iter().map(|s| serde_json::from_str(s).unwrap()).collect();
-
+    let end = env::cycle_count();
+    eprintln!("my_operation_to_measure: {}", end - start);
     // Init the output array
     let mut res: Vec<Result> = Vec::new();
     for message in batch.iter() {
