@@ -31,11 +31,14 @@ fn main() {
         message.longitude = rand::thread_rng().gen_range(10..18) as u32;
         // Serialize the message to a JSON string
         let serstr: String = serde_json::to_string(&message).unwrap();
-        println!("Message: {}", serstr);
         batch.push(serstr);
     }
 
-    let (receipt, _) = process_batch(batch);
+    // stringify the batch
+    let batch_str: String = serde_json::to_string(&batch).unwrap();
+    println!("Batch: {}", batch_str);
+
+    let (receipt, _) = process_batch(batch_str);
 
     // Here is where one would send 'receipt' over the network...
 
