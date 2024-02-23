@@ -14,7 +14,6 @@
 
 #![doc = include_str!("../README.md")]
 
-use provehash_core::*;
 use chrono::Local;
 
 use hello_world_methods::MULTIPLY_ELF;
@@ -26,10 +25,10 @@ use risc0_zkvm::{default_prover, ExecutorEnv, Receipt};
 // The factors a and b are kept secret.
 
 // Compute the product a*b inside the zkVM
-pub fn process_batch(batch: Vec<String>) -> (Receipt, Vec<Result>) {
+pub fn process_task(task: String) -> (Receipt, String) {
     let env = ExecutorEnv::builder()
         // Send a & b to the guest
-        .write(&batch)
+        .write(&task)
         .unwrap()
         .build()
         .unwrap();
@@ -46,30 +45,16 @@ pub fn process_batch(batch: Vec<String>) -> (Receipt, Vec<Result>) {
     let receipt = prover.prove(env, MULTIPLY_ELF).unwrap();
     println!("Proving time: {:?}", start.elapsed());
     // Extract journal of receipt
-    let output: Vec<Result> = receipt.journal.decode().unwrap();
+    let output: String = receipt.journal.decode().unwrap();
 
     // Print, notice, after committing to a journal, the private input became public
     println!("Hello, world! I generated a proof of guest execution! Below is a public output from journal ");
-    for result in &output {
+    /*for result in &output {
         println!("Device ID: {}, Rewards: {}", result.device_id, result.distance);
-    }
+    }*/
+    println!("Journal is: {}", output);
 
     (receipt, output)
 }
 
-#[cfg(test)]
-mod tests {
-    use super::*;
 
-    #[test]
-    fn test_hello_world() {
-        const TEST_FACTOR_ONE: u64 = 17;
-        const TEST_FACTOR_TWO: u64 = 23;
-        let (_, result) = multiply(17, 23);
-        assert_eq!(
-            result,
-            TEST_FACTOR_ONE * TEST_FACTOR_TWO,
-            "We expect the zkVM output to be the product of the inputs"
-        )
-    }
-}

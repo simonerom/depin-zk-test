@@ -2,7 +2,7 @@
 
 Welcome!
 
-This `hello-world` example is a minimal application for the RISC Zero [zkVM],
+This `dewi-demo` example is a minimal application for the RISC Zero [zkVM],
 designed to help you get started building zkVM applications.
 
 For a step-by-step guide to building your first zkVM application, we recommend

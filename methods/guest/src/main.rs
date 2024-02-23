@@ -2,36 +2,39 @@
 
 use provehash_core::*;
 use risc0_zkvm::guest::env;
-use serde_json;
+use serde_json::Value as JsonValue;
+use std::collections::HashMap;
+
 risc0_zkvm::guest::entry!(main);
 
 fn main() {
-    let start = env::cycle_count();
+    let task = get_task();
 
-    // Load the slice of messages from the host
-    // println!("Guest execution started... ");
-    let batch_str: Vec<String> = env::read();
-    // println!("Received {} messages.", batch.len());
-    // Parse the JSON messages into a slice of Message structs
-    let batch: Vec<Message> = batch_str.iter().map(|s| serde_json::from_str(s).unwrap()).collect();
-    let end = env::cycle_count();
-    eprintln!("my_operation_to_measure: {}", end - start);
-    // Init the output array
-    let mut res: Vec<Result> = Vec::new();
-    for message in batch.iter() {
-        // Calculate the distance
-        let distance = (message.latitude - 41).pow(2) + (message.longitude - 12).pow(2);
+    // Init the public output: a hashmap where we store rewards due to each device
+    let mut rewards_map = HashMap::new();
 
-        if ((distance) as u64) < 10 {
-            // println!("Device ID: {} is very close: ({},{}){}", message.device_id, 
-            //     message.latitude, message.longitude, distance);
-            res.push(Result {
-                device_id: message.device_id,
-                distance: distance as u64,
-            });
-        }
+    for message in task.iter() {
+        // Calculate the rewards
+        let reward = rewards_map.entry(message.device_id).or_insert(0 as u64);
+        *reward = *reward + BASE_REWARD + message.connections * REWARD_PER_CONNECTION;
     }
+    
+    // Serialize the result array and send it back to the host
+    let stringyfied_res = serde_json::to_string(&rewards_map).unwrap();
 
-    env::commit(&res);
-    println!("Guest execution completed on {} messages. Starting prooving...", BATCH_SIZE);
+    env::commit(&stringyfied_res);
+    println!("Guest execution completed on {} messages. Starting prooving...", TASK_SIZE);
+}
+
+fn get_task() -> Vec<DeviceMessage> {
+    // The array of messages is a stringyfied json array of strings
+    let task_str: String = env::read();
+    let task_array: JsonValue = serde_json::from_str(&task_str)
+        .expect("Error while deserializing the task array");
+    
+    // Deserialize each string of the array in a Message struct to finally obtain a Vec<Message>
+    let task: Vec<DeviceMessage> = task_array.as_array().unwrap().iter()
+        .map(|s| serde_json::from_str(s.as_str().unwrap()).unwrap())
+        .collect();
+    task
 }
