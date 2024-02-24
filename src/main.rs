@@ -24,8 +24,8 @@ fn main() {
     for i in 0..TASK_SIZE {
         // Create a new message struct
         let mut message= DeviceMessage { device_id:0, connections:0};
-        message.device_id = i as u64;
-        // Let's generate a valid random latitude, as an integer in the range [-11, 14]
+        message.device_id = rand::thread_rng().gen_range(0..3) as u64;
+        // Let's generate a valid random number of connected clients
         message.connections = rand::thread_rng().gen_range(0..4) as u64;
         // Serialize the message to a JSON string
         let serstr: String = serde_json::to_string(&message).unwrap();
