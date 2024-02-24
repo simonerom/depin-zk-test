@@ -1,5 +1,5 @@
 [package]
-name = "multiply"
+name = "dewi"
 version = "0.1.0"
 edition = "2021"
 
@@ -7,7 +7,7 @@ edition = "2021"
 
 [dependencies]
 risc0-zkvm = { path = "../../../../risc0/risc0/zkvm", default-features = false, features = ["std"] }
-provehash-core = { path = "../../core" }
+dewi-core = { path = "../../core" }
 sha2 = "0.10.6"
 geoutils = "0.5.1"
 serde_json = "1.0.113"

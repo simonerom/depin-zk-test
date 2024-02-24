@@ -16,7 +16,7 @@
 
 use chrono::Local;
 
-use hello_world_methods::MULTIPLY_ELF;
+use dewi_demo_methods::DEWI_ELF;
 use risc0_zkvm::{default_prover, ExecutorEnv, Receipt};
 
 // This is a Hello World demo for the RISC Zero zkVM.
@@ -42,7 +42,7 @@ pub fn process_task(task: String) -> (Receipt, String) {
     let start = std::time::Instant::now();
     let date = Local::now();
     println!("Start proving at {}", date.format("%Y-%m-%d %H:%M:%S"));
-    let receipt = prover.prove(env, MULTIPLY_ELF).unwrap();
+    let receipt = prover.prove(env, DEWI_ELF).unwrap();
     println!("Proving time: {:?}", start.elapsed());
     // Extract journal of receipt
     let output: String = receipt.journal.decode().unwrap();

@@ -1,6 +1,6 @@
 #![no_main]
 
-use provehash_core::*;
+use dewi_core::*;
 use risc0_zkvm::guest::env;
 use serde_json::Value as JsonValue;
 use std::collections::HashMap;

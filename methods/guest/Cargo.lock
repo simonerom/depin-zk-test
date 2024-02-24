@@ -281,6 +281,25 @@ dependencies = [
 ]
 
 [[package]]
+name = "dewi"
+version = "0.1.0"
+dependencies = [
+ "dewi-core",
+ "geoutils",
+ "risc0-zkvm",
+ "serde_json",
+ "sha2",
+]
+
+[[package]]
+name = "dewi-core"
+version = "0.1.0"
+dependencies = [
+ "bytemuck",
+ "serde",
+]
+
+[[package]]
 name = "digest"
 version = "0.10.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -386,17 +405,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "b5e6163cb8c49088c2c36f57875e58ccd8c87c7427f7fbd50ea6710b2f3f2e8f"
 
 [[package]]
-name = "multiply"
-version = "0.1.0"
-dependencies = [
- "geoutils",
- "provehash-core",
- "risc0-zkvm",
- "serde_json",
- "sha2",
-]
-
-[[package]]
 name = "num-bigint"
 version = "0.4.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -468,14 +476,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "e2422ad645d89c99f8f3e6b88a9fdeca7fabeac836b1002371c4367c8f984aae"
 dependencies = [
  "unicode-ident",
-]
-
-[[package]]
-name = "provehash-core"
-version = "0.1.0"
-dependencies = [
- "bytemuck",
- "serde",
 ]
 
 [[package]]

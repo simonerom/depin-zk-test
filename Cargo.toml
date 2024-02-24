@@ -1,12 +1,12 @@
 [package]
-name = "hello-world"
+name = "dewi-demo"
 version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-hello-world-methods = { path = "methods" }
+dewi-demo-methods = { path = "methods" }
 risc0-zkvm = {version = "0.20.0", path = "../../risc0/risc0/zkvm" }
-provehash-core = { path = "./core"}
+dewi-core = { path = "./core"}
 bytemuck = "1.14.1"
 chrono = "0.4.19"
 rand = "0.8.4"

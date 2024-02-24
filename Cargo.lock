@@ -638,6 +638,34 @@ dependencies = [
 ]
 
 [[package]]
+name = "dewi-core"
+version = "0.1.0"
+dependencies = [
+ "bytemuck",
+ "serde",
+]
+
+[[package]]
+name = "dewi-demo"
+version = "0.1.0"
+dependencies = [
+ "bytemuck",
+ "chrono",
+ "dewi-core",
+ "dewi-demo-methods",
+ "rand",
+ "risc0-zkvm",
+ "serde_json",
+]
+
+[[package]]
+name = "dewi-demo-methods"
+version = "0.1.0"
+dependencies = [
+ "risc0-build",
+]
+
+[[package]]
 name = "digest"
 version = "0.10.7"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1030,26 +1058,6 @@ name = "heck"
 version = "0.4.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "95505c38b4572b2d910cecb0281560f54b440a19336cbbcb27bf6ce6adc6f5a8"
-
-[[package]]
-name = "hello-world"
-version = "0.1.0"
-dependencies = [
- "bytemuck",
- "chrono",
- "hello-world-methods",
- "provehash-core",
- "rand",
- "risc0-zkvm",
- "serde_json",
-]
-
-[[package]]
-name = "hello-world-methods"
-version = "0.1.0"
-dependencies = [
- "risc0-build",
-]
 
 [[package]]
 name = "hermit-abi"
@@ -1646,14 +1654,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "c7ac8852baeb3cc6fb83b93646fb93c0ffe5d14bf138c945ceb4b9948ee0e3c1"
 dependencies = [
  "autotools",
-]
-
-[[package]]
-name = "provehash-core"
-version = "0.1.0"
-dependencies = [
- "bytemuck",
- "serde",
 ]
 
 [[package]]

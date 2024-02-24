@@ -12,11 +12,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-use provehash_core::*;
+use dewi_core::*;
 use rand::Rng;
 use serde_json;
-use hello_world::process_task;
-use hello_world_methods::MULTIPLY_ID;
+use dewi_demo::process_task;
+use dewi_demo_methods::DEWI_ID;
 
 fn main() {
     let mut task_array: Vec<String> = Default::default();
@@ -40,7 +40,7 @@ fn main() {
     // Here is where one would send 'receipt' over the network...
 
     // Verify receipt, panic if it's wrong
-    receipt.verify(MULTIPLY_ID).expect(
+    receipt.verify(DEWI_ID).expect(
         "Code you have proven should successfully verify; did you specify the correct image ID?",
     );
 }
